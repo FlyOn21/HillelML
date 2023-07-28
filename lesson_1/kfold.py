@@ -66,35 +66,6 @@ class KNN:
         return y_pred
 
 
-# def kfold_cross_validation(X: np.ndarray, y: np.ndarray, k: int) -> List[Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
-#     """Split dataset into k folds.
-#
-#     Args:
-#         X: dataset features
-#         y: dataset target
-#         k: number of folds
-#
-#     Returns:
-#         list of tuples (X_train, y_train, X_test, y_test)
-#     """
-#     n_samples = X.shape[0]
-#     fold_size = n_samples // k
-#     folds = []  # container with results
-#
-#     for i in range(k):
-#         start_idx = i * fold_size
-#         end_idx = (i + 1) * fold_size
-#
-#         X_test = X[start_idx:end_idx]
-#         y_test = y[start_idx:end_idx]
-#
-#         X_train = np.concatenate((X[:start_idx], X[end_idx:]), axis=0)
-#         y_train = np.concatenate((y[:start_idx], y[end_idx:]), axis=0)
-#
-#         folds.append((X_train, y_train, X_test, y_test))
-#     return folds
-
-
 def kfold_cross_validation(
     X: np.ndarray, y: np.ndarray, k: int
 ) -> List[Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
@@ -108,18 +79,21 @@ def kfold_cross_validation(
     Returns:
         list of tuples (X_train, y_train, X_test, y_test)
     """
-
     n_samples = X.shape[0]
     fold_size = n_samples // k
     folds = []  # container with results
-    kf = KFold(n_splits=k)
 
-    for train_index, test_index in kf.split(X):
-        X_train, X_test = X[train_index], X[test_index]
-        y_train, y_test = y[train_index], y[test_index]
+    for i in range(k):
+        start_idx = i * fold_size
+        end_idx = (i + 1) * fold_size
+
+        X_test = X[start_idx:end_idx]
+        y_test = y[start_idx:end_idx]
+
+        X_train = np.concatenate((X[:start_idx], X[end_idx:]), axis=0)
+        y_train = np.concatenate((y[:start_idx], y[end_idx:]), axis=0)
+
         folds.append((X_train, y_train, X_test, y_test))
-    # for i in folds:
-    #     print(i[0].shape, i[1].shape, i[2].shape, i[3].shape)
     return folds
 
 
@@ -252,7 +226,7 @@ def main(num_folds: int = 4, write_result: bool = False) -> None:
                         )
                         if not best_k:
                             best_k = k
-                            print(f"11111New best k = {k}")
+                            print(f"New best k = {k}")
                             diff = diff_accuracy
                         else:
                             if diff > diff_accuracy:
@@ -291,4 +265,4 @@ def main(num_folds: int = 4, write_result: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    main(write_result=True, num_folds=4)
+    main(write_result=True)

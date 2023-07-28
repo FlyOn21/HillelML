@@ -38,6 +38,9 @@ pip install -r requirements.txt
 
 
 
+
+
+
 ## Test with different number of folds with best k=5
 
 Number of folds | Accuracy 
@@ -51,3 +54,5 @@ Number of folds | Accuracy
 8 | Test: 0.86 # Training: 0.85 # Difference: 0.00
 9 | Test: 0.86 # Training: 0.86 # Difference: 0.00
 10 | Test: 0.86 # Training: 0.86 # Difference: 0.00
+11 | Test: 0.86 # Training: 0.85 # Difference: 0.00
+12 | Test: 0.86 # Training: 0.86 # Difference: 0.00

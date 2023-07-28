@@ -5,8 +5,6 @@ from typing import List, Tuple
 
 import numpy as np
 import pandas as pd
-import timeit
-from sklearn.model_selection import KFold
 
 
 def euclidean_distance(point1: np.array, point2: np.array) -> float:
@@ -67,7 +65,7 @@ class KNN:
 
 
 def kfold_cross_validation(
-    X: np.ndarray, y: np.ndarray, k: int
+        X: np.ndarray, y: np.ndarray, k: int
 ) -> List[Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]]:
     """Split dataset into k folds.
 
@@ -164,7 +162,7 @@ def testing_model_KNN(X_test: np.ndarray, y_test: np.ndarray, k: int) -> float:
 
 
 def training_and_testing_model_KNN(
-    X: np.ndarray, y: np.ndarray, X_test: np.ndarray, y_test: np.ndarray, k: int, num_folds: int
+        X: np.ndarray, y: np.ndarray, X_test: np.ndarray, y_test: np.ndarray, k: int, num_folds: int
 ) -> Tuple[float, float, float]:
     """
     Train and test a k-Nearest Neighbors (KNN) model, then calculate the difference in accuracy.
